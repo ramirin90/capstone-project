@@ -15,5 +15,6 @@ public record ServiceLocationRequest(
         String phone,
         String email,
         String website,
-        List<OperatingHourRequest> operatingHours
+        List<OperatingHourRequest> operatingHours,
+        List<String> tags
 ) {}
