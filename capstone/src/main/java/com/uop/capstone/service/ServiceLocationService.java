@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.uop.capstone.dto.ServiceLocationRequest;
 import com.uop.capstone.model.OperatingHour;
+import com.uop.capstone.model.ResourceTag;
 import com.uop.capstone.model.ServiceLocation;
 import com.uop.capstone.repository.ServiceLocationRepository;
 
@@ -41,8 +42,20 @@ public class ServiceLocationService {
 		}).toList();
 
 		location.setOperatingHours(hours);
+		
+		List<ResourceTag> tags = request.tags().stream()
+			    .map(t -> {
+			        ResourceTag tag = new ResourceTag();
+			        tag.setLabel(t);                 // set label
+			        tag.setServiceLocation(location); // set parent
+			        return tag;
+			    })
+			    .toList();
 
-		return repository.save(location);
+			// IMPORTANT: attach tags to the location
+			location.setTags(tags);
+
+			return repository.save(location);
 	}
 	
 	public List<ServiceLocation> getAllLocations() {

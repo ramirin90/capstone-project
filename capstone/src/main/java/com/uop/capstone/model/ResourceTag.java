@@ -1,5 +1,7 @@
 package com.uop.capstone.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,9 +16,26 @@ public class ResourceTag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String label; // e.g., "24/7", "Free Meals", "Emergency Hotline"
+	private String label; // e.g., "24/7", "Free Meals", "Emergency Hotline"
 
     @ManyToOne
     @JoinColumn(name = "service_location_id")
+    @JsonIgnore
     private ServiceLocation serviceLocation;
+    
+    public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public ServiceLocation getServiceLocation() {
+		return serviceLocation;
+	}
+
+	public void setServiceLocation(ServiceLocation serviceLocation) {
+		this.serviceLocation = serviceLocation;
+	}
 }
