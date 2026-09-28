@@ -24,11 +24,44 @@ public class OperatingHour {
     @Enumerated(EnumType.STRING)
     private Days days;
 
-    private LocalTime openTime;
+	private LocalTime openTime;
     private LocalTime closeTime;
 
     @ManyToOne
     @JoinColumn(name = "service_location_id")
     private ServiceLocation serviceLocation;
+    
+    public Days getDays() {
+		return days;
+	}
+
+	public void setDays(Days days) {
+		this.days = days;
+	}
+
+	public LocalTime getOpenTime() {
+		return openTime;
+	}
+
+	public void setOpenTime(LocalTime openTime) {
+		this.openTime = openTime;
+	}
+
+	public LocalTime getCloseTime() {
+		return closeTime;
+	}
+
+	public void setCloseTime(LocalTime closeTime) {
+		this.closeTime = closeTime;
+	}
+
+	public ServiceLocation getServiceLocation() {
+		return serviceLocation;
+	}
+
+	public void setServiceLocation(ServiceLocation serviceLocation) {
+		this.serviceLocation = serviceLocation;
+	}
+	
 }
 
