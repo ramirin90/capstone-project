@@ -1,5 +1,7 @@
 package com.uop.capstone.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.uop.capstone.dto.ServiceLocationRequest;
@@ -41,5 +43,9 @@ public class ServiceLocationService {
 		location.setOperatingHours(hours);
 
 		return repository.save(location);
+	}
+	
+	public List<ServiceLocation> getAllLocations() {
+	    return repository.findAll();
 	}
 }
