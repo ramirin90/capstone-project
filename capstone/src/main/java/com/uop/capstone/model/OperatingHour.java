@@ -2,6 +2,7 @@ package com.uop.capstone.model;
 
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.uop.capstone.dto.Days;
 
 import jakarta.persistence.Entity;
@@ -29,6 +30,7 @@ public class OperatingHour {
 
     @ManyToOne
     @JoinColumn(name = "service_location_id")
+    @JsonIgnore
     private ServiceLocation serviceLocation;
     
     public Days getDays() {
