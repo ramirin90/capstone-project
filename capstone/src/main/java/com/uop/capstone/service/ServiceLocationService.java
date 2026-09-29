@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.function.EntityResponse;
 
 import com.uop.capstone.dto.ServiceLocationRequest;
+import com.uop.capstone.dto.ServiceType;
 import com.uop.capstone.model.OperatingHour;
 import com.uop.capstone.model.ResourceTag;
 import com.uop.capstone.model.ServiceLocation;
@@ -75,6 +76,30 @@ public class ServiceLocationService {
 		return repository.findByName(name).
 				map(ResponseEntity::ok)
 				.orElse(ResponseEntity.notFound().build());
+		
+	}
+	
+	public ResponseEntity<?> getLocationByType(String type) {
+		
+//		return repository.findByType(ServiceType.valueOf(name)).
+//				map(ResponseEntity::ok)
+//				.orElse(ResponseEntity.notFound().build());
+		
+	    ServiceType enumType;
+
+	    try {
+	        enumType = ServiceType.valueOf(type.toUpperCase());
+	    } catch (Exception e) {
+	        return ResponseEntity.badRequest().body("Invalid type: " + type);
+	    }
+
+	    Optional<List<ServiceLocation>> result = repository.findByType(enumType);
+
+	    if (result.isEmpty() || result.get().isEmpty()) {
+	        return ResponseEntity.status(404).body("No locations found for type: " + type);
+	    }
+
+	    return ResponseEntity.ok(result.get());
 		
 	}
 	

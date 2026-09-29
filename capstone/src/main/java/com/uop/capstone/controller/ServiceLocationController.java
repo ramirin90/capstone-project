@@ -44,4 +44,9 @@ public class ServiceLocationController {
 	    return service.getLocationByName(name);
 	}
 	
+	@GetMapping("/locations/type/{name}")
+	public ResponseEntity<?> getAllLocationByType(@PathVariable String name) {
+	    return service.getLocationByType(name); 
+	}
+	
 }
