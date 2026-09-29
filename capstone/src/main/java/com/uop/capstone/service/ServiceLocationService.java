@@ -1,8 +1,11 @@
 package com.uop.capstone.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.function.EntityResponse;
 
 import com.uop.capstone.dto.ServiceLocationRequest;
 import com.uop.capstone.model.OperatingHour;
@@ -61,4 +64,19 @@ public class ServiceLocationService {
 	public List<ServiceLocation> getAllLocations() {
 	    return repository.findAll();
 	}
+	
+	public ResponseEntity<ServiceLocation> getLocationById(long id) {
+		 return repository.findById(id).
+				 map(ResponseEntity::ok)
+				 .orElse(ResponseEntity.notFound().build());
+	}
+	
+	public ResponseEntity<ServiceLocation> getLocationByName(String name) {
+		return repository.findByName(name).
+				map(ResponseEntity::ok)
+				.orElse(ResponseEntity.notFound().build());
+		
+	}
+	
+	
 }
