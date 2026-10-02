@@ -2,9 +2,6 @@ package com.uop.capstone.dto;
 
 import java.util.List;
 
-import lombok.Data;
-
-@Data
 public record ServiceLocationRequest(
         String name,
         String description,
